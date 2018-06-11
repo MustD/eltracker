@@ -1,0 +1,24 @@
+{
+  "name": "eltracker",
+  "version": "1.0.0",
+  "description": "electron based time tracker",
+  "main": "main.js",
+  "scripts": {
+    "test": "test",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MustD/eltracker.git"
+  },
+  "author": "Ilya Obukhov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MustD/eltracker/issues"
+  },
+  "homepage": "https://github.com/MustD/eltracker#readme",
+
+  "devDependencies": {
+    "electron": "2.0.0"
+  }
+}
