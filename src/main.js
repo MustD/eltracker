@@ -2,17 +2,16 @@
  * main
  */
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron');
+import { app, BrowserWindow, Menu, Tray } from 'electron';
+import image from './baseline_alarm_black_18dp.png';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-const { Menu, Tray } = require('electron');
-
 let tray = null;
 app.on('ready', () => {
-    tray = new Tray('./build/baseline_alarm_black_18dp.png');
+    tray = new Tray('build/'+image);
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Item1', type: 'radio' },
         { label: 'Item2', type: 'radio' },
@@ -26,13 +25,16 @@ app.on('ready', () => {
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ width: 800, height: 600 });
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+    });
 
     // and load the index.html of the app.
     mainWindow.loadFile('./build/index.html');
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -46,7 +48,7 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
