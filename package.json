@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "electron based time tracker",
   "scripts": {
-    "test": "test",
-    "start": "npm run build && electron ./build/bundle.js",
-    "build": "webpack --config webpack-dev.config.js"
+    "dev": "npm run build && npm run start",
+    "build": "webpack --config webpack-dev.config.js",
+    "start": "electron ./build/main.js"
   },
   "repository": {
     "type": "git",
@@ -17,17 +17,21 @@
     "url": "https://github.com/MustD/eltracker/issues"
   },
   "homepage": "https://github.com/MustD/eltracker#readme",
+  "directories": {
+    "buildResources": "build",
+    "app": "build"
+  },
   "dependencies": {},
   "devDependencies": {
     "babel-core": "6.26.3",
     "babel-loader": "7.1.4",
     "babel-preset-react": "6.24.1",
-    "electron": "2.0.0",
-    "file-loader": "^1.1.11",
+    "electron": "2.0.2",
+    "file-loader": "1.1.11",
     "html-webpack-plugin": "3.2.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react": "16.4.0",
+    "react-dom": "16.4.0",
     "webpack": "4.12.0",
-    "webpack-cli": "3.0.3"
+    "webpack-cli": "3.0.4"
   }
 }

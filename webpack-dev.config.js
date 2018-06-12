@@ -1,16 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var BUILD_DIR = path.resolve(__dirname, 'build');
-var APP_DIR = path.resolve(__dirname, 'src');
+const BUILD_DIR = path.resolve(__dirname, 'build');
+const APP_DIR = path.resolve(__dirname, 'src');
 
 
-module.exports = {
+const electronMain = {
     entry: APP_DIR + '/main.js',
     target: "electron-main",
     mode: "development",
     output: {
-        filename: 'bundle.js',
+        filename: 'main.js',
         path: BUILD_DIR
     },
     node: {
@@ -29,17 +29,41 @@ module.exports = {
             {
                 test: /\.png/,
                 use: {
-                    loader: "file-loader"
+                    loader: "file-loader",
+                    options: {
+                        name: '[hash].[ext]',
+                    },
+                }
+            },
+        ]
+    },
+};
+const electronRenderer = {
+    entry: APP_DIR + '/renderer.js',
+    target: "electron-renderer",
+    mode: "development",
+    output: {
+        filename: 'renderer.js',
+        path: BUILD_DIR
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader"
                 }
             },
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'ElTracker',
             filename: 'index.html',
             template: APP_DIR + '/index.html',
-            inject: false,
+            inject: true,
         })
     ]
 };
+
+module.exports = [electronMain, electronRenderer];

@@ -3,6 +3,7 @@
  */
 // Modules to control application life and create native browser window
 import { app, BrowserWindow, Menu, Tray } from 'electron';
+import path from 'path';
 import image from './baseline_alarm_black_18dp.png';
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -11,7 +12,8 @@ let mainWindow;
 
 let tray = null;
 app.on('ready', () => {
-    tray = new Tray('build/'+image);
+    const trayIconPath = path.resolve(__dirname, image);
+    tray = new Tray(trayIconPath);
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Item1', type: 'radio' },
         { label: 'Item2', type: 'radio' },
@@ -31,7 +33,8 @@ function createWindow() {
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile('./build/index.html');
+    const indexPath = path.resolve(__dirname, 'index.html');
+    mainWindow.loadFile(indexPath);
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
